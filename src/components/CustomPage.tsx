@@ -12,7 +12,7 @@ interface BrandLogo {
   logo: string;
 }
 
-const TestPage: React.FC = () => {
+const CustomPage: React.FC = () => {
   const navItems: NavItem[] = [
     { label: "Home", href: "/" },
     { label: "Contact Us", href: "/contact-us" },
@@ -58,7 +58,7 @@ const TestPage: React.FC = () => {
               key={item.label}
               href={item.href}
               className={`${
-                index === 0 ? "text-gray-900 font-medium" : "text-gray-500"
+                index === 0 ? "text-[#f9b3a7] font-medium" : "text-gray-500"
               } text-sm lg:text-base hover:text-gray-900 transition-colors`}
             >
               {item.label}
@@ -127,8 +127,8 @@ const TestPage: React.FC = () => {
                 <span
                   className="text-transparent"
                   style={{
-                    WebkitTextStroke: "1px #374151",
-                    WebkitTextFillColor: "transparent",
+                    WebkitTextStroke: "1px black",
+                    // WebkitTextFillColor: "transparent",
                   }}
                 >
                   SALE
@@ -137,8 +137,8 @@ const TestPage: React.FC = () => {
               <p className="text-gray-600 text-xs sm:text-sm font-medium tracking-[0.2em] sm:tracking-[0.3em] mb-4 sm:mb-6 lg:mb-8 uppercase">
                 New Collection
               </p>
-              <Link href="/category">
-                <button className="bg-black text-white px-6 py-3 sm:px-8 sm:py-3 lg:px-10 lg:py-4 rounded-lg lg:rounded-xl text-xs sm:text-sm font-semibold hover:bg-gray-800 hover:transform hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 uppercase tracking-wider mx-auto">
+              <Link href="/category" className="mx-auto w-fit">
+                <button className="bg-black text-white px-6 py-3 sm:px-8 sm:py-3 lg:px-10 lg:py-4 rounded-lg lg:rounded-xl text-xs sm:text-sm font-semibold hover:bg-[#f9b3a7] hover:transform hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 uppercase tracking-wider">
                   Shop Now
                 </button>
               </Link>
@@ -172,7 +172,7 @@ const TestPage: React.FC = () => {
         </div>
 
         {/* Brand Logos */}
-        {/* <div className="mt-12 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 lg:pt-12 border-t border-gray-100">
+        <div className="mt-12 sm:mt-16 lg:mt-20 pt-8 sm:pt-10 lg:pt-12 border-t border-gray-100">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-wrap lg:justify-between items-center max-w-5xl mx-auto gap-4 sm:gap-6 lg:gap-4">
             {brands.map((brand) => (
               <div
@@ -187,7 +187,7 @@ const TestPage: React.FC = () => {
               </div>
             ))}
           </div>
-        </div> */}
+        </div>
 
         {/* Mobile Navigation Menu (Hidden by default) */}
         {/* <div className="md:hidden fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300" id="mobile-menu">
@@ -224,4 +224,4 @@ const TestPage: React.FC = () => {
   );
 };
 
-export default TestPage;
+export default CustomPage;

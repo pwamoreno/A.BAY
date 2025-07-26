@@ -27,7 +27,7 @@ const HomeCard = ({ id, image, name }: HomeCardProps) => {
 		<Link
 			href={`${"/category/" + convertToSlug(name) + "-" + id}`}
 			onClick={() => handleCategoryClick(name, Number(id))}
-			className='flex flex-col gap-2 items-center min-w-[120px] max-w-[120px] cursor-pointer'
+			className='flex flex-col gap-2 items-center min-w-[120px] max-w-[120px] cursor-pointer border-1 border-primary px-5 rounded-md'
 		>
 			<Picture
 				src={image || "/images/home-img-2.png"}

@@ -39,7 +39,7 @@ import { setBaseCurrency, setExchangeRate } from "../Redux/Currency";
 import { fetchExchangeRate } from "@utils/endpoints";
 import { APICall } from "@utils";
 import FormToast from "../Reusables/Toast/SigninToast";
-import { CircleUser, ShoppingBasket } from "lucide-react";
+import { CircleUser, Search, ShoppingBasket } from "lucide-react";
 
 const Header = () => {
   const pathname = usePathname();
@@ -214,7 +214,7 @@ const Header = () => {
         <div className="hidden slg:grid grid-cols-4 items-center w-full py-1 max-w-[1200px] z-30 px-5 xl:px-0">
           <LogoImage className="w-[100px] lg:w-[120px] col-span-1" />
 
-          <div className="flex justify-center h-10 col-span-2">
+          {/* <div className="flex justify-center h-10 col-span-2">
             <input
               type="text"
               placeholder="I'm looking for..."
@@ -244,7 +244,33 @@ const Header = () => {
                 <FaSearch />
               </button>
             )}
+          </div> */}
+
+          <div className="flex justify-center h-10 col-span-2">
+            <div className="relative max-w-full mx-6">
+              <input
+                type="text"
+                placeholder="Search for items..."
+                className="w-[450px] pl-2 pr-12 py-2 rounded-full border border-gray-300 bg-[#F3F9FB] focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+                value={searchValue}
+                onChange={handleInputChange}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") {
+                    handleSearch();
+                  }
+                }}
+              />
+              {isSearchLoading ? (
+                <ImSpinner2 className="absolute right-3 top-2.5 animate-spin text-primary w-5 h-5" />
+              ) : (
+                <Search
+                  className="absolute right-3 top-2.5 text-primary w-5 h-5 cursor-pointer hover:text-gray-600 transition-colors"
+                  onClick={handleSearch}
+                />
+              )}
+            </div>
           </div>
+
           <div className="flex justify-end gap-4 xl:gap-8 col-span-1">
             <div className="flex gap-2 justify-center items-center">
               {wc_customer_info?.shipping?.address_2 ? (
@@ -262,7 +288,7 @@ const Header = () => {
                 </div>
               ) : (
                 // <UserIconSvg className="w-8 h-8" />
-				<CircleUser />
+                <CircleUser />
               )}
 
               <div className="flex flex-col text-primary font-semibold text-sm">
@@ -314,7 +340,7 @@ const Header = () => {
                 ) : (
                   <div className="flex flex-col">
                     <span
-                      className="cursor-pointer hover:text-primaryColor-200 transition"
+                      className="cursor-pointer text-black hover:text-primary transition"
                       onClick={() => router.push("/user/login")}
                     >
                       Log In
@@ -335,7 +361,7 @@ const Header = () => {
                 <DropdownTrigger className="">
                   <button
                     type="button"
-                    className="bg-white border border-primaryColor-100 hover:bg-black cursor-pointer transition-[.4] group text-primaryColor-100 text-2xl group-hover:text-white rounded-full p-0 size-10"
+                    className="bg-[#f9b3a7] text-white hover:bg-black cursor-pointer transition-[.4] group text-medium group-hover:text-white p-0 size-8"
                   >
                     {baseCurrency?.symbol}
                   </button>
@@ -365,12 +391,12 @@ const Header = () => {
                 onClick={() => router.push("/cart")}
               >
                 {typeof window !== "undefined" && (
-                  <div className="flex relative justify-center items-center w-12 h-12 p-2 text-sm">
-                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white shadow-lg flex justify-center items-center rounded-full">
+                  <div className="flex relative justify-center items-center w-10 h-10 p-2 text-sm hover:rounded-full hover:bg-[#fadfdb]">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#f9b3a7] text-white shadow-lg flex justify-center items-center rounded-full">
                       {totalItems}
                     </span>
                     {/* <CartIconSvg /> */}
-					<ShoppingBasket />
+                    <ShoppingBasket />
                   </div>
                 )}
                 <span className="truncate text-sm font-semibold w-16 overflow-hidden">
@@ -398,7 +424,7 @@ const Header = () => {
                   <DropdownTrigger className="">
                     <button
                       type="button"
-                      className="bg-white border border-primaryColor-100 hover:bg-black cursor-pointer transition-[.4] group text-primaryColor-100 text-xl group-hover:text-white rounded-full p-0 size-8"
+                      className="bg-white border  hover:bg-black cursor-pointer transition-[.4] group text-xl group-hover:text-white rounded-full p-0 size-8"
                     >
                       {baseCurrency?.symbol}
                     </button>
@@ -418,9 +444,7 @@ const Header = () => {
                         <DropdownItem
                           key={currency.code}
                           value={currency.code}
-                          className={`w-fit ${
-                            isSelected ? "text-primary" : ""
-                          }`}
+                          className={`w-fit ${isSelected ? "text-black" : ""}`}
                         >
                           {`${currency.country} | ${currency.code} (${currency.symbol})`}
                         </DropdownItem>
@@ -495,11 +519,11 @@ const Header = () => {
                   onClick={() => router.push("/cart")}
                   className="flex relative justify-center items-center w-10 h-10 p-2 text-xs"
                 >
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white shadow-lg flex justify-center items-center rounded-full">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-black text-white shadow-lg flex justify-center items-center rounded-full">
                     {totalItems}
                   </span>
                   {/* <CartIconSvg /> */}
-				  <ShoppingBasket />
+                  <ShoppingBasket />
                 </div>
               )}
             </div>
@@ -507,8 +531,8 @@ const Header = () => {
           <div className="flex w-full h-10 px-1 pb-2">
             <input
               type="text"
-              placeholder="I'm looking for..."
-              className="w-full text-base text-black/70 px-4 py-1 border border-[#ccc] rounded-l-sm outline-none focus:border-primaryColor-100 focus:ring-primaryColor-100 focus:ring-1 transition"
+              placeholder="Search for items..."
+              className="w-full text-base text-black/70 px-4 py-1 border border-[#ccc] rounded-l-sm outline-none focus:border-primary focus:ring-primary focus:ring-1 transition"
               value={searchValue}
               onChange={handleInputChange}
               onKeyDown={(event) => {
