@@ -21,11 +21,13 @@ export const metadata: Metadata = {
 
 const page = () => {
   return (
-    <AppLayout className="className='pt-10 mx-auto max-w-[1256px] mt-20 max-sm:mt-22">
+    <AppLayout className="pt-10 mx-auto mt-10 max-sm:mt-22">
       <CustomPage />
-      <AllCategorySection />
-      <div className="mt-4 sm:mt-10">
-        <SortedProducts />
+      <div className="mx-12 max-md:mx-6">
+        <AllCategorySection />
+        <div className="mt-4 sm:mt-10">
+          <SortedProducts />
+        </div>
       </div>
     </AppLayout>
   );
